@@ -5,8 +5,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import org.junit.Test;
+import org.testng.Assert;
 
-import io.cucumber.cienvironment.internal.com.eclipsesource.json.Json;
+
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 
@@ -71,7 +72,7 @@ public class Store_CRUD {
 	@Test
 	public void deletePurchaseOrderByID() {
 		RestAssured.baseURI = "https://petstore.swagger.io/v2";
-		given()
+	 String reponse =	given()
 		      .header("Content-Type", "application/json")
 		      .pathParam("id", id)
 	   .when()
@@ -81,6 +82,10 @@ public class Store_CRUD {
 	   .then()
 	        .assertThat()
 	        .log().all()
-	        .statusCode(200);
+	        .statusCode(200)
+	        .extract().response().asString();
+	 JsonPath js = new JsonPath(reponse);
+	 String messageValue =  js.getString("message");
+	 Assert.assertEquals(messageValue, id);
 	}
 }

@@ -30,16 +30,11 @@ public class PetSteps extends Pet_CRUD{
      //  getPet();
 	}
 
-	@When("User delete  the pet")
+	@Then("User delete  the pet")
 	public void user_delete_the_pet() {
        deletePet();
 	}
 
-	@Then("The pet is removed  from the store successfully")
-	public void the_pet_is_removed_from_the_store_successfully() {
-
-	}
-		
 	
 
 
